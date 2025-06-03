@@ -9,15 +9,12 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class BookingResponse {
+public class RatingResponse {
     private Long id;
-    private Long clienteId;
-    private Long cleanerId;
-    private String cleanerNombre;
-    private String cleanerApellido;
+    private Long userId;
+    private String usuarioNombre;
+    private Integer valor;
+    private String comentario;
     private LocalDateTime fecha;
-    private String direccion;
-    private String estado;
-    private LocalDateTime createdAt;
 }
 

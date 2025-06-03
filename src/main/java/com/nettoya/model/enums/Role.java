@@ -1,5 +1,7 @@
 package com.nettoya.model.enums;
 
-public class Role {
-    
+public enum Role {
+    CLIENTE,
+    LIMPIADOR
 }
+

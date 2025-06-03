@@ -8,10 +8,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Getter @Setter
-public class BookingRequest {
-    @NotNull
-    private Long cleanerId;
-
+public class BookingUpdateDTO {
     @NotNull
     @Future
     private LocalDateTime fecha;

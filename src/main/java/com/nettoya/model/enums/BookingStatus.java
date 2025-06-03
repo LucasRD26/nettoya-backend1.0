@@ -1,5 +1,9 @@
 package com.nettoya.model.enums;
 
-public class BookingStatus {
-    
+public enum BookingStatus {
+    PENDIENTE,
+    CONFIRMADA,
+    CANCELADA,
+    COMPLETADA
 }
+

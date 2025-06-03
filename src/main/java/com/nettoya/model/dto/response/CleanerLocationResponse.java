@@ -7,15 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class UserProfileResponse {
-    private Long id;
-    private String email;
+public class CleanerLocationResponse {
+    private Long cleanerId;
     private String nombre;
     private String apellido;
-    private Integer edad;
-    private String direccion;
+    private Double latitud;
+    private Double longitud;
     private String fotoUrl;
-    private String descripcion;
-    private String rol;
     private Double rating;
 }
+
