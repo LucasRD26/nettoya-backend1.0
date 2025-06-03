@@ -16,10 +16,10 @@ public class Location {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    @Column(nullable = false, precision = 10, scale = 7)
+    @Column(nullable = false)
     private Double latitud;
 
-    @Column(nullable = false, precision = 10, scale = 7)
+    @Column(nullable = false)
     private Double longitud;
 
     @Column(length = 100)

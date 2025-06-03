@@ -40,7 +40,7 @@ public class User {
     @Column(nullable = false)
     private Role rol; // CLIENTE, LIMPIADOR
 
-    @Column(precision = 2, scale = 1)
+    @Column
     private Double rating;
 
     // Relación bidireccional con Location
