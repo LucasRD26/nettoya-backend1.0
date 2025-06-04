@@ -14,6 +14,11 @@ public class CleanerController {
     @Autowired
     private CleanerService cleanerService;
 
+    @GetMapping
+    public ResponseEntity<List<CleanerProfileResponse>> getAllCleaners() {
+        return ResponseEntity.ok(cleanerService.getAllCleaners());
+    }
+    
     @GetMapping("/top")
     public ResponseEntity<List<CleanerProfileResponse>> getTopCleaners() {
         return ResponseEntity.ok(cleanerService.getTopRatedCleaners());

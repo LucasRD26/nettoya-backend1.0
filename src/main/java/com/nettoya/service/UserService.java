@@ -9,6 +9,8 @@ import com.nettoya.model.entity.User;
 import com.nettoya.model.enums.Role;
 import com.nettoya.repository.CleanerRepository;
 import com.nettoya.repository.UserRepository;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +25,13 @@ public class UserService {
     private CleanerRepository cleanerRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private ModelMapper modelMapper; // Asegúrate de inyectar ModelMapper
 
+    private UserProfileResponse mapToUserProfileResponse(User user) {
+        return modelMapper.map(user, UserProfileResponse.class);
+    }
+    
     public void changePassword(PasswordChangeDTO passwordDto) {
         User user = getCurrentUser();
         
@@ -63,6 +71,29 @@ public class UserService {
         return mapToProfileResponse(user);
     }
 
+    public UserProfileResponse becomeCleaner(Long userId) {
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+    // Cambia el rol
+    user.setRol(Role.LIMPIADOR);
+
+    // Crea entidad Cleaner si no existe
+    if (user.getCleaner() == null) {
+        Cleaner cleaner = new Cleaner();
+        cleaner.setUser(user);
+        cleaner.setPrecioHora(0.0); // O pide al usuario que lo defina
+        cleaner.setDisponibilidad("Disponible");
+        cleanerRepository.save(cleaner);
+        user.setCleaner(cleaner);
+    }
+
+    userRepository.save(user);
+
+    // Devuelve el perfil actualizado
+    return mapToUserProfileResponse(user);
+    }
+    
     public void upgradeToCleaner(CleanerRegistrationDTO cleanerDto) {
         User user = getCurrentUser();
         Cleaner cleaner = new Cleaner();

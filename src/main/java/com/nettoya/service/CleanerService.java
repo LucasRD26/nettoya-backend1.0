@@ -57,5 +57,10 @@ public class CleanerService {
         dto.setEdad(cleaner.getUser().getEdad());
         return dto;
     }
+    public List<CleanerProfileResponse> getAllCleaners(){
+        return cleanerRepository.findAll().stream()
+                .map(this::mapToCleanerResponse)
+                .collect(Collectors.toList());
+    }
 }
 

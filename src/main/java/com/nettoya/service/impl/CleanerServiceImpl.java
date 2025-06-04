@@ -20,6 +20,7 @@ public class CleanerServiceImpl extends CleanerService { // Cambiar extends por 
     private final CleanerRepository cleanerRepository;
     private final LocationRepository locationRepository;
 
+
     @Override
     @Transactional(readOnly = true)
     public List<CleanerProfileResponse> getTopRatedCleaners() {

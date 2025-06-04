@@ -52,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
                 "Bearer",
                 userDetails.getId(),
                 userDetails.getUsername(),
+                userDetails.getEmail(),
                 userDetails.getAuthorities()
         );
     }
@@ -89,6 +90,7 @@ public class AuthServiceImpl implements AuthService {
                 "Bearer",
                 userDetails.getId(),
                 userDetails.getUsername(),
+                userDetails.getEmail(),
                 userDetails.getAuthorities()
         );
     }

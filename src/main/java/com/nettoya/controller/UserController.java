@@ -4,10 +4,12 @@ import com.nettoya.model.dto.request.UserUpdateDTO;
 import com.nettoya.model.dto.request.CleanerRegistrationDTO;
 import com.nettoya.model.dto.request.PasswordChangeDTO;
 import com.nettoya.model.dto.response.UserProfileResponse;
+import com.nettoya.security.UserDetailsImpl;
 import com.nettoya.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,6 +39,11 @@ public class UserController {
     public ResponseEntity<?> changePassword(@Valid @RequestBody PasswordChangeDTO passwordDto) {
         userService.changePassword(passwordDto);
         return ResponseEntity.ok().build();
+    }
+    @PutMapping("/become-cleaner")
+    public ResponseEntity<UserProfileResponse> becomeCleaner(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        UserProfileResponse updatedProfile = userService.becomeCleaner(userDetails.getId());
+        return ResponseEntity.ok(updatedProfile);
     }
 }
 

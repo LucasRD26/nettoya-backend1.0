@@ -2,6 +2,8 @@ package com.nettoya.model.dto.response;
 
 import java.util.Collection;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,15 +14,24 @@ import lombok.Setter;
 public class JwtResponse {
     private String accessToken;
     private String refreshToken;
-    private String type = "Bearer";
+    private String tokenType = "Bearer";
     private Long id;
+    private String username;
     private String email;
-    private Collection<?> roles;
+    private Collection<? extends GrantedAuthority> roles;
 
     public JwtResponse(String accessToken, String refreshToken, String type) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
-        this.type = type;
+        this.tokenType = type;
+    }
+
+    public JwtResponse(String accessToken, String refreshToken, Long id, String username, String email) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.id = id;
+        this.username = username;
+        this.email = email;
     }
 }
 

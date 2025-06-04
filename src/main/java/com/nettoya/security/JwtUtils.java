@@ -4,6 +4,7 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ public class JwtUtils {
     private SecretKey getSecretKey() {
     return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 }
+
 
     public String generateToken(UserDetails userDetails) {
     return Jwts.builder()
@@ -70,6 +72,16 @@ public class JwtUtils {
             .expiration(new Date(System.currentTimeMillis() + refreshExpirationMs))
             .signWith(getSecretKey(), Jwts.SIG.HS512)
             .compact();
+    }
+
+    public ResponseCookie generateHttpOnlyJwtCookie(String token) {
+        return ResponseCookie.from("jwt", token)
+                .httpOnly(true)
+                .secure(true)
+                .path("/")
+                .maxAge(jwtExpirationMs / 1000)
+                .sameSite("Lax")
+                .build();
     }
 }
 

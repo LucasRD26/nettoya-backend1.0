@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor @Builder
+@Getter @Setter @NoArgsConstructor  @Builder
 public class CleanerProfileResponse {
     private Long id;
     private String nombre;
