@@ -11,6 +11,8 @@ import com.nettoya.repository.BookingRepository;
 import com.nettoya.repository.CleanerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,7 @@ public class BookingService {
         booking.setFecha(request.getFecha());
         booking.setDireccion(request.getDireccion());
         booking.setEstado(BookingStatus.PENDIENTE);
+        booking.setCreatedAt(LocalDateTime.now());
         bookingRepository.save(booking);
         return mapToBookingResponse(booking);
     }

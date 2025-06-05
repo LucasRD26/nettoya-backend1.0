@@ -33,7 +33,7 @@ public class Booking {
     @Column(nullable = false)
     private BookingStatus estado; // PENDIENTE, CONFIRMADA, CANCELADA, COMPLETADA
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime createdAt;
 }
 
